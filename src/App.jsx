@@ -305,6 +305,9 @@ function App() {
                 <span>Issue resolution</span>
                 <span>Cross-functional teamwork</span>
               </div>
+            </div>{" "}
+            <div className="experience-logos hospitality-logos">
+              <img src="/accenture-Logo.png" alt="Accenture logo" />
             </div>
           </div>
           <div className="experience-card">
@@ -327,6 +330,12 @@ function App() {
                 <span>Organization</span>
                 <span>Leadership</span>
               </div>
+            </div>
+            <div className="experience-logos hospitality-logos">
+              <img src="/barrel-house-logo.jpg" alt="Barrel House logo" />
+              <img src="/hilton-logo.png" alt="Hilton logo" />
+              <img src="/paul-bocuse-logo.webp" alt="Paul Bocuse logo" />
+              <img src="/trader-vics-logo.jpg" alt="Trader Vic's logo" />
             </div>
           </div>
 
