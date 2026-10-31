@@ -42,7 +42,7 @@ export function Projects() {
                 project.link.startsWith("http") ? "_blank" : undefined
               }
               rel={
-                project.link.startsWith("http") ? "noreferrer" : undefined
+                project.link.startsWith("http") ? "noopener noreferrer" : undefined
               }
             >
               {project.linkLabel} <ArrowUpRight size={16} />

@@ -6,8 +6,10 @@ import {
 } from "lucide-react";
 
 import { profile } from "../data/profile";
+import { useState } from "react";
 
 export function Hero() {
+    const [imageError, setImageError] = useState(false);
   return (
     <section className="hero" id="home">
       <div className="hero-copy">
@@ -56,7 +58,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero-art" aria-label="Professional headshot area">
+      <div className="hero-art">
         <div className="art-orbit orbit-one" />
         <div className="art-orbit orbit-two" />
 
@@ -68,16 +70,14 @@ export function Hero() {
             <br />
             PHOTO
           </div>
-
+        {!imageError && (
           <img
             className="portrait-image"
             src="/headshot.jpg"
             alt={`${profile.name} — professional headshot`}
-            onError={(event) => {
-              event.currentTarget.style.display = "none";
-            }}
+            onError={() => setImageError(true)}
           />
-
+        )}
           <div className="portrait-caption">
             <span className="availability-dot" /> Building what's next
           </div>

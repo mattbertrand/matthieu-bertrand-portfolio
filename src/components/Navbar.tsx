@@ -29,6 +29,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
           type="button"
           onClick={toggleTheme}
           aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          aria-pressed={theme === "dark"}
           title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
         >
           {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}

@@ -11,7 +11,8 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
 function App() {
-  const [theme, setTheme] = useState(() => {
+  type Theme = "light" | "dark";
+  const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("portfolio-theme");
       if (savedTheme === "light" || savedTheme === "dark") {
     return savedTheme;

@@ -20,9 +20,10 @@ export function PhotoGallery() {
           <img
             src="/travel.JPG"
             alt="Travel photo in Yellowstone National Park"
+            loading="lazy"
           />
           <figcaption>
-            3 months Road trip around the United States on a Harley Davidson
+            Three-month road trip across the United States on a Harley-Davidson
           </figcaption>
         </figure>
       </div>

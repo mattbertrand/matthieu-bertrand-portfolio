@@ -17,12 +17,13 @@ export function Experience() {
             Application Developer Associate → Application Developer Analyst
           </p>
           <p>
-            Built and supported features for a statewide case-management
-            system serving millions of residents across 58 California
-            counties. Worked with React, Java, JSP, SQL, production
-            debugging, testing, and Agile delivery; collaborated with teams
-            of 50+ engineers and helped manage incidents and defects across
-            production workflows.
+            Developed and supported features for a statewide healthcare
+            case-management
+            platform serving millions of residents across 58 California
+            counties. Worked primarily with React, Redux, Java, Spring Boot, 
+            JSP and SQL, contributed to feature development, 
+            production troubleshooting, defect resolution, incident case management,
+            and Agile delivery within a large cross-functional engineering team.
           </p>
           <div className="experience-tags">
             <span>Web applications</span>
@@ -46,11 +47,11 @@ export function Experience() {
           </p>
           <p>
             14 years of experience in hospitality and restaurant management
-            taught me the importance of clear communication, organization,
-            and delivering a positive customer experience. I understand how
-            important it is to listen carefully, clarify requirements,
-            manage expectations, and ensure that the final result meets the
-            needs of the people relying on it.
+            developed my ability to communicate clearly, stay organized under
+            pressure, lead teams, and understand customer needs. These
+            experiences continue to influence how I approach software
+            development, from understanding requirements to delivering
+            solutions that create real value for users.
           </p>
           <div className="experience-tags">
             <span>Communication</span>

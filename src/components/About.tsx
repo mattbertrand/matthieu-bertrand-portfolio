@@ -28,9 +28,11 @@ export function About() {
           </p>
 
           <p>
-            I’m open to opportunities where I can contribute, learn from a
-            strong team, and grow—whether that’s software development,
-            quality assurance, application support, or implementation.
+            I'm looking for my next opportunity in software engineering,
+            where I can contribute to a strong team, continue developing
+            my technical skills, and build products that solve practical
+            problems. I'm also open to adjacent technical roles that
+            provide opportunities to grow as an engineer.
           </p>
         </div>
 
