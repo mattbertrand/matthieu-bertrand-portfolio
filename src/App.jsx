@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -8,7 +8,9 @@ import {
   Mail,
   MapPin,
   Menu,
+  Moon,
   Rocket,
+  Sun,
   Wrench,
 } from "lucide-react";
 
@@ -63,8 +65,28 @@ function SectionHeading({ eyebrow, title, copy }) {
 }
 
 function App() {
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("portfolio-theme");
+    if (savedTheme) return savedTheme;
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+
+useEffect(() => {
+  localStorage.setItem("portfolio-theme", theme);
+  document.documentElement.style.colorScheme = theme;
+}, [theme]);
+
+const toggleTheme = () => {
+  setTheme((currentTheme) =>
+    currentTheme === "light" ? "dark" : "light"
+  );
+};
+
   return (
-    <div className="site-shell">
+    <div className="site-shell" data-theme={theme}>
       <header className="topbar">
         <a className="wordmark" href="#home" aria-label="Go to home">
           <span className="wordmark-mark">{"</>"}</span>
@@ -74,6 +96,15 @@ function App() {
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
+          <button 
+          className="theme-toggle"
+          type="button"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          >
+            {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
+          </button>
           <a className="nav-contact" href="#contact">
             Contact <ArrowUpRight size={15} />
           </a>
