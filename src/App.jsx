@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { profile } from "./data/profile";
+import { projects } from "./data/projects";
+import { SectionHeading } from "./components/SectionHeading";
+
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -7,62 +11,11 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Menu,
   Moon,
   Rocket,
   Sun,
   Wrench,
 } from "lucide-react";
-
-// EDIT THESE DETAILS before publishing. Replace the email and Relay URL with your own.
-const profile = {
-  name: "Matthieu Bertrand",
-  role: "Software Engineer | React / Full-Stack",
-  location: "Greater San Francisco Bay Area",
-  email: "matt@matthieubertrand.com",
-  linkedin: "https://www.linkedin.com/in/matthieu-bertrand/",
-  github: "https://github.com/mattbertrand",
-  resume: "/resume.pdf",
-  swap4work: "https://swap4work.us/",
-  relay: "https://aquatic-relay-ops-flow.base44.app",
-};
-
-const projects = [
-  {
-    number: "01",
-    name: "Swap4Work",
-    status: "LIVE · MARKETING",
-    description:
-      "A community platform that helps people exchange items, skills, and services. I took the idea from concept to a live product and continue to lead its launch and marketing.",
-    tags: ["Product development", "React", "Launch & marketing"],
-    link: profile.swap4work,
-    linkLabel: "Visit Swap4Work",
-    tone: "mint",
-    icon: <Rocket size={22} />,
-  },
-  {
-    number: "02",
-    name: "Relay",
-    status: "IN DEVELOPMENT",
-    description:
-      "A restaurant manager assistant designed to make day-to-day operations easier by bringing communications and customer feedback into a more manageable workflow.",
-    tags: ["Product thinking", "Workflow tools", "AI-assisted development"],
-    link: profile.relay,
-    linkLabel: "Ask me about Relay",
-    tone: "lavender",
-    icon: <Wrench size={22} />,
-  },
-];
-
-function SectionHeading({ eyebrow, title, copy }) {
-  return (
-    <div className="section-heading">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      {copy && <p className="section-copy">{copy}</p>}
-    </div>
-  );
-}
 
 function App() {
   const [theme, setTheme] = useState(() => {
