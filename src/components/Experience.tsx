@@ -18,12 +18,12 @@ export function Experience() {
           </p>
           <p>
             Developed and supported features for a statewide healthcare
-            case-management
-            platform serving millions of residents across 58 California
-            counties. Worked primarily with React, Redux, Java, Spring Boot, 
-            JSP and SQL, contributed to feature development, 
-            production troubleshooting, defect resolution, incident case management,
-            and Agile delivery within a large cross-functional engineering team.
+            case-management platform serving millions of residents across 58
+            California counties. Worked primarily with React, Redux, Java,
+            Spring Boot, JSP and SQL, contributed to feature development,
+            production troubleshooting, defect resolution, incident case
+            management, and Agile delivery within a large cross-functional
+            engineering team.
           </p>
           <div className="experience-tags">
             <span>Web applications</span>
@@ -42,16 +42,14 @@ export function Experience() {
 
         <div className="experience-main">
           <h3>Hospitality Industry - Worldwide</h3>
-          <p className="experience-role">
-            Server → Restaurant & Bar Manager
-          </p>
+          <p className="experience-role">Server → Restaurant & Bar Manager</p>
           <p>
             14 years of experience in hospitality and restaurant management
             developed my ability to communicate clearly, stay organized under
             pressure, lead teams, and understand customer needs. These
             experiences continue to influence how I approach software
-            development, from understanding requirements to delivering
-            solutions that create real value for users.
+            development, from understanding requirements to delivering solutions
+            that create real value for users.
           </p>
           <div className="experience-tags">
             <span>Communication</span>

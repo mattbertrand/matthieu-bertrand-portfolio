@@ -6,7 +6,9 @@ import "./styles.css";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
-  throw new Error("Root element not found. Check index.html for a div with id 'root'.");
+  throw new Error(
+    "Root element not found. Check index.html for a div with id 'root'."
+  );
 }
 
 createRoot(rootElement).render(

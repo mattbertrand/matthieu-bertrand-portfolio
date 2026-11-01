@@ -1,8 +1,4 @@
-import {
-  ArrowUpRight,
-  Moon,
-  Sun,
-} from "lucide-react";
+import { ArrowUpRight, Moon, Sun } from "lucide-react";
 
 import { profile } from "../data/profile";
 

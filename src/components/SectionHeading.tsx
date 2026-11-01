@@ -4,11 +4,7 @@ interface SectionHeadingProps {
   copy?: string;
 }
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  copy,
-}: SectionHeadingProps) {
+export function SectionHeading({ eyebrow, title, copy }: SectionHeadingProps) {
   return (
     <div className="section-heading">
       <p className="eyebrow">{eyebrow}</p>

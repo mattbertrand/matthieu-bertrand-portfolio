@@ -14,9 +14,9 @@ function App() {
   type Theme = "light" | "dark";
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("portfolio-theme");
-      if (savedTheme === "light" || savedTheme === "dark") {
-    return savedTheme;
-  }
+    if (savedTheme === "light" || savedTheme === "dark") {
+      return savedTheme;
+    }
 
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
@@ -29,9 +29,7 @@ function App() {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((currentTheme) =>
-      currentTheme === "light" ? "dark" : "light"
-    );
+    setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
   };
 
   return (

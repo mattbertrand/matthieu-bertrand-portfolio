@@ -1,15 +1,10 @@
-import {
-  ArrowDownRight,
-  ArrowUpRight,
-  Code2,
-  MapPin,
-} from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Code2, MapPin } from "lucide-react";
 
 import { profile } from "../data/profile";
 import { useState } from "react";
 
 export function Hero() {
-    const [imageError, setImageError] = useState(false);
+  const [imageError, setImageError] = useState(false);
   return (
     <section className="hero" id="home">
       <div className="hero-copy">
@@ -17,9 +12,7 @@ export function Hero() {
           <span className="availability-dot" /> OPEN TO OPPORTUNITIES
         </div>
 
-        <p className="hero-kicker">
-          Hello, I'm {profile.name.split(" ")[0]}.
-        </p>
+        <p className="hero-kicker">Hello, I'm {profile.name.split(" ")[0]}.</p>
 
         <h1>
           I build useful software and turn ideas into{" "}
@@ -27,10 +20,10 @@ export function Hero() {
         </h1>
 
         <p className="hero-description">
-          Software engineer with 4 years of professional experience building
-          and supporting production applications, with a strong focus on
-          React and full-stack web development. Open to opportunities across
-          software engineering, QA, application support, and implementation.
+          Software engineer with 4 years of professional experience building and
+          supporting production applications, with a strong focus on React and
+          full-stack web development. Open to opportunities across software
+          engineering, QA, application support, and implementation.
         </p>
 
         <div className="hero-actions">
@@ -70,14 +63,14 @@ export function Hero() {
             <br />
             PHOTO
           </div>
-        {!imageError && (
-          <img
-            className="portrait-image"
-            src="/headshot.jpg"
-            alt={`${profile.name} — professional headshot`}
-            onError={() => setImageError(true)}
-          />
-        )}
+          {!imageError && (
+            <img
+              className="portrait-image"
+              src="/headshot.jpg"
+              alt={`${profile.name} — professional headshot`}
+              onError={() => setImageError(true)}
+            />
+          )}
           <div className="portrait-caption">
             <span className="availability-dot" /> Building what's next
           </div>
@@ -85,9 +78,7 @@ export function Hero() {
 
         <div className="floating-chip chip-top">Curiosity → Code</div>
 
-        <div className="floating-chip chip-bottom">
-          Ship. Learn. Improve.
-        </div>
+        <div className="floating-chip chip-bottom">Ship. Learn. Improve.</div>
 
         <div className="art-spark">✳</div>
       </div>

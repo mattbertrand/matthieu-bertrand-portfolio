@@ -1,4 +1,3 @@
-
 export const profile = {
   name: "Matthieu Bertrand",
   role: "Software Engineer | React / Full-Stack",

@@ -15,9 +15,9 @@ export function Contact() {
       </h2>
 
       <p className="contact-copy">
-        I'm exploring my next opportunity in tech. If you're hiring, know a
-        team I should meet, or simply want to talk about a project, I'd be
-        glad to connect.
+        I'm exploring my next opportunity in tech. If you're hiring, know a team
+        I should meet, or simply want to talk about a project, I'd be glad to
+        connect.
       </p>
 
       <a className="button button-white" href={`mailto:${profile.email}`}>

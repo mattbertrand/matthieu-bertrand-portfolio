@@ -38,11 +38,11 @@ export function Projects() {
             <a
               className="project-link"
               href={project.link}
-              target={
-                project.link.startsWith("http") ? "_blank" : undefined
-              }
+              target={project.link.startsWith("http") ? "_blank" : undefined}
               rel={
-                project.link.startsWith("http") ? "noopener noreferrer" : undefined
+                project.link.startsWith("http")
+                  ? "noopener noreferrer"
+                  : undefined
               }
             >
               {project.linkLabel} <ArrowUpRight size={16} />
@@ -52,8 +52,8 @@ export function Projects() {
       </div>
 
       <p className="project-disclaimer">
-        Project status is described as of the date of this portfolio. Ask me
-        for a walkthrough or additional details.
+        Project status is described as of the date of this portfolio. Ask me for
+        a walkthrough or additional details.
       </p>
     </section>
   );
