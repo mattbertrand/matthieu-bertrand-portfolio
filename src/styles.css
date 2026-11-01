@@ -1177,3 +1177,19 @@ body:has(.site-shell[data-theme="dark"]) {
       color 0.2s ease;
   }
 }
+
+.project-icon .project-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Swap4Work logo */
+.mint .project-icon:has(.project-logo) {
+  background: transparent;
+  width: 64px;
+  height: 64px;
+  border-radius: 0;
+  margin: 26px 0 18px;
+}

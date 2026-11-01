@@ -1,4 +1,4 @@
-import { Rocket, Wrench } from "lucide-react";
+import { Wrench } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface Project {
@@ -24,7 +24,11 @@ export const projects: Project[] = [
     link: "https://swap4work.us/",
     linkLabel: "Visit Swap4Work",
     tone: "mint",
-    icon: <Rocket size={22} />,
+    icon: <img 
+        className="project-logo"
+        src="/images/Swap4Work-logo.png" 
+        alt="Swap4Work Logo" 
+      />,
   },
   {
     number: "02",
