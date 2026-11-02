@@ -117,4 +117,24 @@ describe("chat function", () => {
       error: "Sorry, I couldn't generate an answer. Please try again.",
     });
   });
+
+  it("returns 429 when Gemini quota is exceeded", async () => {
+    generateContent.mockRejectedValueOnce(new Error("429 quota exceeded"));
+
+    const response = await handler(
+      createRequest({ message: "What technologies do I use?" })
+    );
+
+    expect(response.status).toBe(429);
+  });
+
+  it("returns 503 when Gemini is temporarily unavailable", async () => {
+    generateContent.mockRejectedValueOnce(new Error("503 service unavailable"));
+
+    const response = await handler(
+      createRequest({ message: "What technologies do I use?" })
+    );
+
+    expect(response.status).toBe(503);
+  });
 });
