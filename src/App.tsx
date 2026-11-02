@@ -9,6 +9,7 @@ import { Experience } from "./components/Experience";
 import { ResumeCallout } from "./components/ResumeCallout";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { ChatAssistant } from "./components/ChatAssistant";
 
 function App() {
   type Theme = "light" | "dark";
@@ -45,6 +46,7 @@ function App() {
         <ResumeCallout />
         <Contact />
       </main>
+      <ChatAssistant />
       <Footer />
     </div>
   );
