@@ -137,4 +137,56 @@ describe("chat function", () => {
 
     expect(response.status).toBe(503);
   });
+
+  it("returns 500 when the Gemini API key is missing", async () => {
+    delete process.env.GEMINI_API_KEY;
+
+    const response = await handler(
+      createRequest({ message: "What technologies do I use?" })
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: "The assistant is temporarily unavailable.",
+    });
+  });
+
+  it("limits conversation history to the latest 10 visitor messages", async () => {
+    const history = Array.from({ length: 12 }, (_, index) => ({
+      role: "user",
+      content: `Message ${index + 1}`,
+    }));
+
+    await handler(
+      createRequest({
+        message: "Current question",
+        history,
+      })
+    );
+
+    const request = generateContent.mock.calls[0][0];
+
+    expect(request.contents).toHaveLength(11);
+    expect(request.contents[0].parts[0].text).toBe("Message 3");
+  });
+
+  it("limits each history message to 1000 characters", async () => {
+    const history = [
+      {
+        role: "user",
+        content: "A".repeat(1500),
+      },
+    ];
+
+    await handler(
+      createRequest({
+        message: "Current question",
+        history,
+      })
+    );
+
+    const request = generateContent.mock.calls[0][0];
+
+    expect(request.contents[0].parts[0].text).toHaveLength(1000);
+  });
 });
