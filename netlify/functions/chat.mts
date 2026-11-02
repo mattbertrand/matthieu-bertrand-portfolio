@@ -189,22 +189,6 @@ export default async function handler(request: Request): Promise<Response> {
       ? body.history
       : [];
 
-  const history = Array.isArray(rawHistory)
-    ? rawHistory
-        .filter(
-          (item): item is { role: "user"; content: string } =>
-            typeof item === "object" &&
-            item !== null &&
-            "role" in item &&
-            "content" in item &&
-            item.role === "user" &&
-            typeof item.content === "string"
-        )
-        .slice(-10)
-        .map((item) => item.content.trim().slice(0, 1000))
-        .filter((content) => content.length > 0)
-    : [];
-
   const visitorHistory: string[] = Array.isArray(rawHistory)
     ? rawHistory
         .filter(
@@ -270,13 +254,40 @@ export default async function handler(request: Request): Promise<Response> {
 
     return Response.json({ answer });
   } catch (error) {
-    console.error(
-      "Gemini request failed:",
-      error instanceof Error ? error.message : "Unknown error"
-    );
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+
+    console.error("Gemini request failed:", errorMessage);
+
+    // Gemini quota or rate-limit error.
+    if (
+      errorMessage.includes("429") ||
+      errorMessage.toLowerCase().includes("quota")
+    ) {
+      return Response.json(
+        {
+          error:
+            "The assistant is receiving too many requests. Please try again in a minute.",
+        },
+        { status: 429 }
+      );
+    }
+
+    // Temporary Gemini service issue.
+    if (errorMessage.includes("503") || errorMessage.includes("504")) {
+      return Response.json(
+        {
+          error:
+            "The assistant is temporarily unavailable. Please try again shortly.",
+        },
+        { status: 503 }
+      );
+    }
 
     return Response.json(
-      { error: "Sorry, I couldn't generate an answer. Please try again." },
+      {
+        error: "Sorry, I couldn't generate an answer. Please try again.",
+      },
       { status: 502 }
     );
   }
