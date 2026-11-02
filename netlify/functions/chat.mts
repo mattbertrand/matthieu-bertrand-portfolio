@@ -258,6 +258,7 @@ export default async function handler(request: Request): Promise<Response> {
       ],
       config: {
         systemInstruction: PORTFOLIO_CONTEXT,
+        maxOutputTokens: 500,
       },
     });
 
