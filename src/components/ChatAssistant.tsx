@@ -31,9 +31,7 @@ export function ChatAssistant() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen) {
-      inputRef.current?.focus();
-    } else {
+    if (!isOpen) {
       launcherRef.current?.focus();
     }
   }, [isOpen]);
