@@ -24,11 +24,13 @@ export const projects: Project[] = [
     link: "https://swap4work.us/",
     linkLabel: "Visit Swap4Work",
     tone: "mint",
-    icon: <img 
+    icon: (
+      <img
         className="project-logo"
-        src="/images/Swap4Work-logo.png" 
-        alt="Swap4Work Logo" 
-      />,
+        src="/images/Swap4Work-logo.png"
+        alt="Swap4Work Logo"
+      />
+    ),
   },
   {
     number: "02",

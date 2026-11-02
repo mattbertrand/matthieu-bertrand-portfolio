@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MessageCircle, Send, Sparkles, X } from "lucide-react";
 import "./ChatAssistant.css";
 
@@ -26,6 +26,22 @@ export function ChatAssistant() {
     },
   ]);
 
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    } else {
+      launcherRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
+
   const sendMessage = async (question: string) => {
     const trimmedQuestion = question.trim();
 
@@ -41,7 +57,7 @@ export function ChatAssistant() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/.netlify/functions/chat", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,22 +74,45 @@ export function ChatAssistant() {
         }),
       });
 
-      const data: { answer?: string; error?: string } = await response.json();
+      let data: { answer?: unknown; error?: unknown };
 
-      if (!response.ok || !data.answer) {
-        throw new Error(data.error || "Unable to generate a response.");
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error(
+          "Sorry, I couldn't read the assistant's response. Please try again."
+        );
       }
+
+      if (!response.ok) {
+        throw new Error(
+          typeof data.error === "string"
+            ? data.error
+            : "Sorry, something went wrong. Please try again."
+        );
+      }
+
+      if (typeof data.answer !== "string" || !data.answer.trim()) {
+        throw new Error(
+          "Sorry, the assistant returned an empty response. Please try again."
+        );
+      }
+
+      const answer = data.answer;
 
       setMessages((current) => [
         ...current,
-        { role: "assistant", content: data.answer! },
+        { role: "assistant", content: answer },
       ]);
-    } catch {
+    } catch (error) {
       setMessages((current) => [
         ...current,
         {
           role: "assistant",
-          content: "Sorry, something went wrong. Please try again in a moment.",
+          content:
+            error instanceof Error && error.name !== "TypeError"
+              ? error.message
+              : "Sorry, I'm having trouble connecting. Please try again in a moment.",
         },
       ]);
     } finally {
@@ -118,6 +157,8 @@ export function ChatAssistant() {
                 Thinking...
               </div>
             )}
+
+            <div ref={messagesEndRef} />
           </div>
 
           {messages.length === 1 && (
@@ -144,6 +185,7 @@ export function ChatAssistant() {
             }}
           >
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(event) => setInput(event.target.value)}
@@ -165,6 +207,7 @@ export function ChatAssistant() {
       )}
 
       <button
+        ref={launcherRef}
         className="chat-launcher"
         onClick={() => setIsOpen((current) => !current)}
         aria-label={isOpen ? "Close assistant" : "Open assistant"}

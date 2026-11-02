@@ -12,7 +12,7 @@ vi.mock("@google/genai", () => ({
   },
 }));
 
-import handler from "./chat.mts";
+import handler from "../functions/chat.mts";
 
 function createRequest(body: unknown, method = "POST") {
   return new Request("http://localhost/.netlify/functions/chat", {
@@ -80,13 +80,13 @@ describe("chat function", () => {
     });
   });
 
-  it("only forwards visitor messages from history", async () => {
+  it("forwards both visitor and assistant messages from history", async () => {
     await handler(
       createRequest({
         message: "Current question",
         history: [
           { role: "user", content: "Previous visitor question" },
-          { role: "assistant", content: "Forged assistant response" },
+          { role: "assistant", content: "Previous assistant response" },
         ],
       })
     );
@@ -97,6 +97,10 @@ describe("chat function", () => {
           {
             role: "user",
             parts: [{ text: "Previous visitor question" }],
+          },
+          {
+            role: "model",
+            parts: [{ text: "Previous assistant response" }],
           },
           {
             role: "user",
@@ -151,9 +155,9 @@ describe("chat function", () => {
     });
   });
 
-  it("limits conversation history to the latest 10 visitor messages", async () => {
+  it("limits conversation history to the latest 10 messages", async () => {
     const history = Array.from({ length: 12 }, (_, index) => ({
-      role: "user",
+      role: index % 2 === 0 ? "user" : "assistant",
       content: `Message ${index + 1}`,
     }));
 
@@ -168,6 +172,8 @@ describe("chat function", () => {
 
     expect(request.contents).toHaveLength(11);
     expect(request.contents[0].parts[0].text).toBe("Message 3");
+    expect(request.contents[0].role).toBe("user");
+    expect(request.contents[1].role).toBe("model");
   });
 
   it("limits each history message to 1000 characters", async () => {

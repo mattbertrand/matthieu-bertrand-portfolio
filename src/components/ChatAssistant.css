@@ -107,6 +107,7 @@
 /* Messages */
 .chat-messages {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -243,6 +244,7 @@
   .chat-panel {
     width: calc(100vw - 32px);
     height: min(540px, calc(100dvh - 100px));
+    max-height: calc(100dvh - 100px);
     margin-bottom: 12px;
   }
 
@@ -258,4 +260,14 @@
   .chat-suggestions button {
     transition: none;
   }
+}
+
+/* Keyboard accessibility */
+.chat-launcher:focus-visible,
+.chat-close:focus-visible,
+.chat-suggestions button:focus-visible,
+.chat-input-area input:focus-visible,
+.chat-input-area button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
 }
