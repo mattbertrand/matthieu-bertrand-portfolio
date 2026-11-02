@@ -182,6 +182,8 @@ export default async function handler(request: Request): Promise<Response> {
   }
 
   // Validate and limit conversation history.
+  // Only accept visitor messages; assistant messages from the browser
+  // cannot be trusted because a visitor could forge them.
   const rawHistory =
     typeof body === "object" && body !== null && "history" in body
       ? body.history
@@ -190,20 +192,33 @@ export default async function handler(request: Request): Promise<Response> {
   const history = Array.isArray(rawHistory)
     ? rawHistory
         .filter(
-          (item): item is { role: "user" | "assistant"; content: string } =>
+          (item): item is { role: "user"; content: string } =>
             typeof item === "object" &&
             item !== null &&
             "role" in item &&
             "content" in item &&
-            (item.role === "user" || item.role === "assistant") &&
+            item.role === "user" &&
             typeof item.content === "string"
         )
         .slice(-10)
-        .map((item) => ({
-          role: item.role,
-          content: item.content.trim().slice(0, 1000),
-        }))
-        .filter((item) => item.content.length > 0)
+        .map((item) => item.content.trim().slice(0, 1000))
+        .filter((content) => content.length > 0)
+    : [];
+
+  const visitorHistory: string[] = Array.isArray(rawHistory)
+    ? rawHistory
+        .filter(
+          (item): item is { role: "user"; content: string } =>
+            typeof item === "object" &&
+            item !== null &&
+            "role" in item &&
+            "content" in item &&
+            item.role === "user" &&
+            typeof item.content === "string"
+        )
+        .slice(-10)
+        .map((item) => item.content.trim().slice(0, 1000))
+        .filter((content) => content.length > 0)
     : [];
   // Retrieve the API key securely from the environment.
 
@@ -232,9 +247,9 @@ export default async function handler(request: Request): Promise<Response> {
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash-lite",
       contents: [
-        ...history.map((item) => ({
-          role: item.role === "assistant" ? "model" : "user",
-          parts: [{ text: item.content }],
+        ...visitorHistory.map((content) => ({
+          role: "user",
+          parts: [{ text: content }],
         })),
         {
           role: "user",
