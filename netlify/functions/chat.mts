@@ -280,3 +280,12 @@ export default async function handler(request: Request): Promise<Response> {
     );
   }
 }
+
+export const config = {
+  path: "/.netlify/functions/chat",
+  rateLimit: {
+    windowLimit: 10,
+    windowSize: 60,
+    aggregateBy: ["ip", "domain"],
+  },
+};
